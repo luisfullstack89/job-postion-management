@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: JobPositionAPI  # Path to your backend Dockerfile
+    ports:
+      - "5235:5235"   # Expose port 7154 for your backend API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5235  # Configure .NET to listen on HTTPS at port 7154
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: job-position-management  # Path to your frontend Dockerfile
+    ports:
+      - "5173:80"   # Expose port 5173 for your React app (accessible at http://localhost:5173)
+    networks:
+      - app-network
+    depends_on:
+      - backend   # Ensure backend starts before frontend
+
+networks:
+  app-network:
+    driver: bridge
