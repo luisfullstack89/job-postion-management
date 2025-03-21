@@ -1,7 +1,7 @@
 
 # Project Title
 
-Job position management 
+Job position management platform
 
 
 ## Contributing
